@@ -1,6 +1,7 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.7.21'
     id 'application'
+    id 'maven-publish'
 }
 
 group = 'net.lustenauer'
@@ -28,4 +29,48 @@ compileTestKotlin {
 
 application {
     mainClassName = 'MainKt'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'net.lustenauer'
+            artifactId = 'kotlin.utils'
+            version = '0.0.1-SNAPSHOT'
+
+            from components.java
+
+            // create the sign pom artifact
+            pom {
+                name = 'KOTLIN UTILS'
+                description = 'A project with some usefull things for Kotlin in Kotlin'
+                url = 'https://github.com/incluedu/kotlinUtils'
+                inceptionYear = '2022'
+
+                developers {
+                    developer {
+                        id = 'incluedu'
+                        name = 'Patric Hollenstein'
+                        email = 'patric.hollenstein@lustenauer.net'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:git://github.com/incluedu/kotlinUtils.git'
+                    developerConnection = 'scm:git:ssh://github.com/incluedu/kotlinUtils.git'
+                    url = 'https://github.com/incluedu/kotlinUtils'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "OSSRH"
+            url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
+    }
 }
