@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'net.lustenauer'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 repositories {
     mavenCentral()
@@ -27,16 +27,9 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = '11'
 }
 
-application {
-    mainClassName = 'MainKt'
-}
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = 'net.lustenauer'
-            artifactId = 'kotlin.utils'
-            version = '0.0.1-SNAPSHOT'
 
             from components.java
 
